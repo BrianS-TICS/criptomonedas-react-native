@@ -19,7 +19,7 @@ const Formulario = ({ moneda, criptoMoneda, setMoneda, setCriptoMoneda, setConsu
             const resultado = await axios.get(url);
             setCriptoMonedas(resultado.data.Data)
         }
-        setConsultarApi(true)
+        
         consultarAPI()
     }, [])
 
@@ -34,7 +34,7 @@ const Formulario = ({ moneda, criptoMoneda, setMoneda, setCriptoMoneda, setConsu
             mostrarAlert()
             return;
         }
-        console.log('Cotizando..')
+        setConsultarApi(true)
     }
     
     const mostrarAlert = () =>{

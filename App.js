@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/header';
+import Cotizacion from './components/cotizacion';
 import Formulario from './components/Formulario';
 import axios from 'axios';
 import {
@@ -14,6 +15,7 @@ const App = () => {
   const [moneda, setMoneda] = useState('')
   const [criptoMoneda, setCriptoMoneda] = useState('')
   const [consultarApi, setConsultarApi] = useState(false)
+  const [resultado, setResultado] = useState({})
 
   useEffect(() => {
     const cotizarCriptomoneda = async () => {
@@ -21,6 +23,7 @@ const App = () => {
         // Obtener cotizacion
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptoMoneda}&tsyms=${moneda}`
         const resultado = await axios.get(url)
+        setResultado(resultado.data.DISPLAY[criptoMoneda][moneda])
         setConsultarApi(false)
       }
     }
@@ -44,7 +47,9 @@ const App = () => {
           setCriptoMoneda={setCriptoMoneda}
           setConsultarApi={setConsultarApi}
         />
-
+        <Cotizacion 
+          resultado={resultado}
+        />
       </View>
     </>
   );
